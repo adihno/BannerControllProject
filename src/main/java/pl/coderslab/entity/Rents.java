@@ -11,7 +11,7 @@ import java.util.List;
 @Table(name = "rents")
 public class Rents {
     @Id
-    private int id;
+    private Long id;
     private String Rented_until;
     private String Rented_from;
     private int price;
@@ -28,6 +28,10 @@ public class Rents {
         this.price = price;
         this.banner = banner;
         this.renter = renter;
+    }
+
+    public Long getId() {
+        return id;
     }
 
     public String getRented_until() {

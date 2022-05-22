@@ -10,8 +10,9 @@ import org.springframework.security.config.annotation.web.configuration.EnableWe
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
 import org.springframework.security.core.userdetails.User;
 import org.springframework.security.crypto.password.NoOpPasswordEncoder;
-import pl.coderslab.dao.AdminDao;
+
 import pl.coderslab.entity.Admin;
+import pl.coderslab.repository.AdminRepository;
 
 import java.util.List;
 
@@ -20,12 +21,12 @@ import java.util.List;
 public class SecurityConfig extends WebSecurityConfigurerAdapter {
     private Admin admin;
     @Autowired
-    AdminDao adminDao;
+    AdminRepository adminRepository;
     @Override
     protected void configure(AuthenticationManagerBuilder auth) throws Exception {
 
         // add our users for in memory authentication
-        List<Admin> admins = adminDao.getAllAdmins();
+        List<Admin> admins = adminRepository.findAll();
         for (int i = 0; i <admins.size(); i++) {
             auth.inMemoryAuthentication()
                     .withUser(admins.get(i).getEmail())
@@ -41,7 +42,8 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
     }
     @Override
     protected void configure(HttpSecurity httpSecurity)throws Exception{
-        httpSecurity.authorizeRequests()
+        httpSecurity.csrf().disable().
+        authorizeRequests()
                 .anyRequest().authenticated()
                 .and()
                 .formLogin()

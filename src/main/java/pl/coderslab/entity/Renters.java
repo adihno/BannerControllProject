@@ -9,7 +9,7 @@ import java.util.List;
 @Table(name = "renters")
 public class Renters {
     @Id
-    private int id;
+    private Long id;
     @Size(max = 30)
     private String firstName;
     @Size(max = 40)

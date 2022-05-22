@@ -2,33 +2,29 @@ package pl.coderslab.controller;
 
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.boot.Banner;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
+import org.springframework.stereotype.Repository;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
-import pl.coderslab.dao.AdminDao;
-import pl.coderslab.dao.BannerDao;
-import pl.coderslab.dao.RentsDao;
 import pl.coderslab.entity.Admin;
 import pl.coderslab.entity.Banners;
-import pl.coderslab.entity.Rents;
-
+import pl.coderslab.repository.AdminRepository;
+import pl.coderslab.repository.BannerRepository;
 import javax.validation.ConstraintViolation;
 import javax.validation.Validator;
-import java.util.ArrayList;
 import java.util.List;
 import java.util.Set;
 
 @Controller
+@Repository
 public class AdminController {
     @Autowired
-    AdminDao adminDao;
+    AdminRepository adminRepository;
     @Autowired
-    BannerDao bannerDao;
-    @Autowired
-    RentsDao rentsDao;
+    BannerRepository bannerRepository;
+
 
 
 
@@ -52,9 +48,9 @@ public class AdminController {
         Admin admin = new Admin();
         Set<ConstraintViolation<Admin>> violations = validator.validate(admin);
         if(violations.isEmpty()){
-            adminDao.saveAdmin(admin);
             admin.setEmail(email);
             admin.setPassword(password);
+            adminRepository.save(admin);
             return "success";
 
         }else{
@@ -80,9 +76,9 @@ public class AdminController {
     public String showDashboard(Model model){
         Authentication auth = SecurityContextHolder.getContext().getAuthentication();
         String email = auth.getName();
-        Admin admin = adminDao.getAdminByEmail(email);
-        int adminId = admin.getId();
-        List<Banners> bannerList = bannerDao.getBannersListByAdminId(adminId);
+        Admin admin = adminRepository.getAdminByEmail(email);
+        Long adminId = admin.getId();
+        List<Banners> bannerList = bannerRepository.getByAdminId(adminId);
         model.addAttribute("banners",bannerList);
         return "dashboard";
     }
@@ -92,17 +88,8 @@ public class AdminController {
     }
 
 
-//    @RequestMapping(value = "/dashboard/info/{id}", method = RequestMethod.GET)
-//    public String showInfo(Model model, @PathVariable("id") int id){
-//        List<Banners> banners = bannerDao.getBannerById(id);
-//        model.addAttribute("banner", banners);
-//        return "showInfo";
-//
-//    }
-//    @RequestMapping(value = "/dashboard/info/{id}", method = RequestMethod.POST)
-//    public String info(){
-//        return "redirect:/dashboard";
-//    }
+
+
 
 
 }

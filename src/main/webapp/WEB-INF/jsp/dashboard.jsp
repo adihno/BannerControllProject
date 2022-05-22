@@ -19,7 +19,7 @@
 <h1>Dashboard</h1>
 <br>
 
-
+<h2> <a href="/dashboard/add">Dodaj nowy baner</a> </h2>
 <table>
     <tr>
         <th>Banners</th>

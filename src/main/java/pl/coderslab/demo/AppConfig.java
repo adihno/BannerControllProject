@@ -13,7 +13,7 @@ import javax.validation.Validator;
 @Configuration
 @ComponentScan(basePackages = "pl.coderslab")
 
-@EnableJpaRepositories(basePackages = "pl.coderslab")
+
 @EnableTransactionManagement
 public class AppConfig {
     @Bean

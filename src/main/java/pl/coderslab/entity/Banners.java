@@ -8,7 +8,10 @@ import javax.validation.constraints.Size;
 @Table(name = "banners")
 public class Banners {
     @Id
-    private int id;
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Basic(optional = false)
+    @Column(name = "id",unique=true, nullable = false)
+    private Long id;
     @Size(max = 40)
     private String street;
     private int price;
@@ -17,7 +20,7 @@ public class Banners {
     @JoinColumn(name = "admin_id")
     private Admin admin;
 
-    public boolean isIs_rented() {
+    public boolean getIs_rented() {
         return is_rented;
     }
 
@@ -41,11 +44,11 @@ public class Banners {
         this.rents = rents;
     }
 
-    public int getId() {
+    public Long getId() {
         return id;
     }
 
-    public void setId(int id) {
+    public void setId(Long id) {
         this.id = id;
     }
 
@@ -70,13 +73,6 @@ public class Banners {
         this.price = price;
     }
 
-    public boolean isRented() {
-        return is_rented;
-    }
-
-    public void setRented(boolean rented) {
-        is_rented = rented;
-    }
 
 
 

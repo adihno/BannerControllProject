@@ -7,7 +7,7 @@ import javax.validation.constraints.Size;
 @Table(name = "admins")
 public class Admin {
         @Id
-        private int id;
+        private Long id;
         @Email
         private String email;
         @Size(min = 5,max = 40, message = "Haslo musi miec od 5 do 40 znakow")
@@ -47,11 +47,11 @@ public class Admin {
         this.password = password;
     }
 
-    public int getId() {
+    public Long getId() {
         return id;
     }
 
-    public void setId(int id) {
+    public void setId(Long id) {
         this.id = id;
     }
 }
