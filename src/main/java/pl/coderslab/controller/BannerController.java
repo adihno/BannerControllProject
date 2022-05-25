@@ -35,6 +35,7 @@ public class BannerController {
     public String showInfo(Model model, @PathVariable("id") Long id){
         List<Banners> banners = bannerRepository.getBannersById(id);
         model.addAttribute("banner", banners);
+        model.addAttribute("id",id);
         return "show-info";
     }
     @RequestMapping(value = "/dashboard/info/{id}", method = RequestMethod.POST)
@@ -82,6 +83,7 @@ public class BannerController {
     @RequestMapping(value = "/dashboard/edit/{id}", method = RequestMethod.GET)
     public String showEditForm(Model model){
         model.addAttribute("banners", new Banners());
+
         return "edit-form";
     }
     @RequestMapping(value = "/dashboard/edit/{id}", method = RequestMethod.POST)

@@ -6,9 +6,13 @@ import javax.validation.constraints.Size;
 @Entity
 @Table(name = "admins")
 public class Admin {
-        @Id
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Basic(optional = false)
+    @Column(name = "id",unique=true, nullable = false)
         private Long id;
         @Email
+        @Column(unique = true)
         private String email;
         @Size(min = 5,max = 40, message = "Haslo musi miec od 5 do 40 znakow")
         private String password;

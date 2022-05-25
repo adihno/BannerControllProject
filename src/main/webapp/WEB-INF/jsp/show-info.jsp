@@ -20,7 +20,6 @@
     <tr>
         <th>Street</th>
         <th>Price</th>
-        <th>is Rented</th>
         <th>rented from</th>
         <th>rented until</th>
     </tr>
@@ -41,7 +40,9 @@
         </c:choose>
 
     </tr>
+        <form action="/dashboard/info/${id}" method="post">
     <td><input type="submit" value="Wstecz"></td>
+        </form>
     </c:forEach>
 </table>
 

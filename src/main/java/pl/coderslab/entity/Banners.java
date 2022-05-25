@@ -2,6 +2,8 @@ package pl.coderslab.entity;
 
 
 import javax.persistence.*;
+import javax.validation.constraints.Min;
+import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 
 @Entity
@@ -13,7 +15,10 @@ public class Banners {
     @Column(name = "id",unique=true, nullable = false)
     private Long id;
     @Size(max = 40)
+    @NotNull(message = "ulica nie moze byc pusta")
     private String street;
+    @NotNull(message = "Cena nie moze byc pusta")
+    @Min(value = 0, message = "Cena nie moze byc mniejsza niz 0")
     private int price;
     private boolean is_rented;
     @ManyToOne

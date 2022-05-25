@@ -16,7 +16,7 @@
     <title>Title</title>
 </head>
 <body>
-
+<%--@elvariable id="banners" type="pl.coderslab.entity.Banners"--%>
 <form:form modelAttribute="banners" method="post">
     <label for="street">Street</label>
     <form:input path="street"/>
@@ -27,13 +27,13 @@
     <form:input path="price" />
     <form:errors path="price" cssClass="error" />
     <br/>
-
     <label for="is_rented">Is rented?</label>
     <form:select path="is_rented" cssClass="error">
         <form:option value="true"/>
         <form:option value="false"/>
         <form:errors path="is_rented" cssClass="error"/>
     </form:select>
+
 
     <br/>
     <input type="submit">

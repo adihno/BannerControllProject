@@ -20,6 +20,7 @@
 <br>
 
 <h2> <a href="/dashboard/add">Dodaj nowy baner</a> </h2>
+<h2> <a href="/dashboard/add-renter">Dodaj osobę wypożyczającą do bazy danych</a> </h2>
 <table>
     <tr>
         <th>Banners</th>
@@ -34,6 +35,7 @@
             <td><a href="/dashboard/info/${banner.id}" >Wiecej informacji</a> </td>
             <td> <a href="/dashboard/edit/${banner.id}" >Edytuj </a></td>
             <td> <a href="/dashboard/delete/${banner.id}" >Usun </a></td>
+            <td> <a href="/dashboard/add-rent/${banner.id}">Dodaj wypozyczenie</a> </td>
         </tr>
     </c:forEach>
 
